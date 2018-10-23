@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="entries_version">
+        <item>V1.0</item>
+        <item>V2.0</item>
+        <item>V3.0</item>
+    </string-array>
+    <string-array name="entries_value_version">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+</resources>

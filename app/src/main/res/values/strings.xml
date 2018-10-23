@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">测试设备</string>
+    <string name="scan_1">扫码1</string>
+    <string name="scan_2">扫码2</string>
+    <string name="scan_3">扫码3</string>
+    <string name="scan_4">扫码4</string>
+    <string name="scan_5">扫码5</string>
+    <string name="clear">清空</string>
+    <string name="start">开始测试</string>
+    <string name="stop">清除</string>
+    <string name="index_1">#1</string>
+    <string name="index_2">#2</string>
+    <string name="index_3">#3</string>
+    <string name="index_4">#4</string>
+    <string name="index_5">#5</string>
+    <string name="state_success">状态:成功</string>
+    <string name="state_fail">状态:失败</string>
+    <string name="state_wait">状态:等待数据...</string>
+    <string name="state_shutdown">状态:关机</string>
+    <string name="state_null">状态:</string>
+    <string name="settings">设置</string>
+    <string name="csq_min">CSQ最低值</string>
+
+</resources>
