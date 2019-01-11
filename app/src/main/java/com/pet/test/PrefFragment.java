@@ -18,6 +18,7 @@ import com.pet.test.utils.Const;
 public class PrefFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener, Preference.OnPreferenceChangeListener{
     //    private ListPreference mVersionPreference;
     private EditTextPreference mCsqPreference;
+    private EditTextPreference mCnPreference;
     private EditTextPreference mSwPreference;
     private SharedPreferences mSharedPreferences;
 
@@ -27,6 +28,7 @@ public class PrefFragment extends PreferenceFragment implements SharedPreference
         addPreferencesFromResource(R.xml.settings);
         mSharedPreferences = getPreferenceScreen().getSharedPreferences();
         mCsqPreference = (EditTextPreference) findPreference(Const.KEY_CSQ);
+        mCnPreference = (EditTextPreference) findPreference(Const.KEY_CN);
         mSwPreference = (EditTextPreference) findPreference(Const.KEY_SW_VERSION);
 
 //        mVersionPreference = (ListPreference) findPreference(Const.KEY_VERSION);
@@ -43,12 +45,17 @@ public class PrefFragment extends PreferenceFragment implements SharedPreference
     public void onResume() {
         super.onResume();
         getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
-        String csq = mSharedPreferences.getString(Const.KEY_CSQ,Const.DEFAULT_CSQ);
+        String csq = mSharedPreferences.getString(Const.KEY_CSQ, Const.DEFAULT_CSQ);
         Log.i("yy","csq="+csq);
-        mSharedPreferences.edit().putString(Const.KEY_CSQ,csq).commit();
+        mSharedPreferences.edit().putString(Const.KEY_CSQ, csq).commit();
         mCsqPreference.setSummary(csq);
 
-        String sw = mSharedPreferences.getString(Const.KEY_SW_VERSION,Const.DEFAULT_SW_VERSION);
+        String cn = mSharedPreferences.getString(Const.KEY_CN, Const.DEFAULT_CN);
+        Log.i("yy","cn="+cn);
+        mSharedPreferences.edit().putString(Const.KEY_CN, cn).commit();
+        mCnPreference.setSummary(cn);
+
+        String sw = mSharedPreferences.getString(Const.KEY_SW_VERSION, Const.DEFAULT_SW_VERSION);
         Log.i("yy","sw="+sw);
         mSharedPreferences.edit().putString(Const.KEY_SW_VERSION, sw).commit();
         mSwPreference.setSummary(sw);
@@ -67,10 +74,11 @@ public class PrefFragment extends PreferenceFragment implements SharedPreference
         Log.i("yy","key="+key);
         if(Const.KEY_CSQ.equals(key)) {
             mCsqPreference.setSummary(mCsqPreference.getText());
+        } else if(Const.KEY_CN.equals(key)) {
+            mCnPreference.setSummary(mCnPreference.getText());
         } else if(Const.KEY_SW_VERSION.equals(key)){
             mSwPreference.setSummary(mSwPreference.getText());
         }
-
     }
 
     @Override

@@ -2,14 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingHorizontal="@dimen/item_padding_horizontal"
     tools:context="com.pet.test.MainActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="25dp"
+        android:layout_height="@dimen/item_header_height"
         android:gravity="center_vertical">
 
         <TextView
@@ -49,7 +49,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="75dp"
+        android:layout_height="@dimen/item_content_height"
         android:background="#e0e0e0"
         android:padding="1px">
 
@@ -154,6 +154,32 @@
 
                 <TextView
                     android:id="@+id/sw"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#e0e0e0" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#ffffff"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="@dimen/item_padding_horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorDisable"
+                    android:text="星值" />
+
+                <TextView
+                    android:id="@+id/cn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true" />
@@ -266,6 +292,32 @@
 
                 <TextView
                     android:id="@+id/hw"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#e0e0e0" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#ffffff"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="@dimen/item_padding_horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorDisable"
+                    android:text="产品型号" />
+
+                <TextView
+                    android:id="@+id/model"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true" />

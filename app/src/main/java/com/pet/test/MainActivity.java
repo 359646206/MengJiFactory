@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.TextureView;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -139,6 +140,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+//        String csqStr = mSharedPreferences.getString(Const.KEY_CSQ, Const.DEFAULT_CSQ);
+//        String cnStr = mSharedPreferences.getString(Const.KEY_CN, Const.DEFAULT_CN);
+//        String sw = mSharedPreferences.getString(Const.KEY_SW_VERSION, Const.DEFAULT_SW_VERSION);
+//        int minCsq = Integer.parseInt(csqStr);
+//        int minCn = Integer.parseInt(cnStr);
+//        Log.i(TAG, "onResume() minCsq=" + minCsq + ",cn=" + minCn + ",sw=" + sw);
+
         Log.i(TAG, "onResume()");
         if (isOngoing01) {
             item01.setScanButtonEnable(false);
@@ -313,6 +321,23 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(intent, requestCode);
     }
 
+    private boolean judgeCn(Pet pet, int minCn) {
+        String cn1Str = pet.getGpsCn1();
+        String cn2Str = pet.getGpsCn2();
+        String cn3Str = pet.getGpsCn3();
+        if(TextUtils.isEmpty(cn1Str) || TextUtils.isEmpty(cn2Str) || TextUtils.isEmpty(cn3Str)) {
+            return false;
+        } else {
+            int cn1 = Integer.parseInt(cn1Str);
+            int cn2 = Integer.parseInt(cn2Str);
+            int cn3 = Integer.parseInt(cn3Str);
+            if(cn1 > minCn && cn2 > minCn && cn3 > minCn) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
     private void infoPet(final int index, String imei) {
         JSONObject root = new JSONObject();
         try {
@@ -343,9 +368,11 @@ public class MainActivity extends AppCompatActivity {
                         if (status == 200) {
                             Pet pet = baseEntity.getData();
                             String csqStr = mSharedPreferences.getString(Const.KEY_CSQ, Const.DEFAULT_CSQ);
+                            String cnStr = mSharedPreferences.getString(Const.KEY_CN, Const.DEFAULT_CN);
                             String sw = mSharedPreferences.getString(Const.KEY_SW_VERSION, Const.DEFAULT_SW_VERSION);
                             int minCsq = Integer.parseInt(csqStr);
-                            Log.i(TAG, "minCsq=" + minCsq + ",sw=" + sw);
+                            int minCn = Integer.parseInt(cnStr);
+                            Log.i(TAG, "minCsq=" + minCsq + ",minCn=" + minCn + ",sw=" + sw);
                             Log.i(TAG, "info onNext() pet=" + pet.toString());
                             switch (index) {
                                 case REQUEST_SCAN_CODE_01:
@@ -360,6 +387,7 @@ public class MainActivity extends AppCompatActivity {
                                                 pet.getBattery() == 0 ||
                                                 pet.getLongitude() == 0 ||
                                                 !(sw.equals(pet.getSVersion())) ||
+                                                !judgeCn(pet, minCn)||
                                                 pet.getLatitude() == 0) {
                                             item01.setStatusText("状态: 失败");
                                             item01.setStatusTextColor(Color.RED);
@@ -374,6 +402,8 @@ public class MainActivity extends AppCompatActivity {
                                         item01.setWeiduText("" + pet.getLatitude());
                                         item01.setSwText("" + pet.getSVersion());
                                         item01.setHwText("" + pet.getHVersion());
+                                        item01.setCnText(""+pet.getGpsCn1()+"、"+pet.getGpsCn2()+"、"+pet.getGpsCn3());
+                                        item01.setModelText(Const.DEFAULT_MODEL);
                                     }
                                     break;
                                 case REQUEST_SCAN_CODE_02:
@@ -388,6 +418,7 @@ public class MainActivity extends AppCompatActivity {
                                                 pet.getBattery() == 0 ||
                                                 pet.getLongitude() == 0 ||
                                                 !(sw.equals(pet.getSVersion())) ||
+                                                !judgeCn(pet, minCn)||
                                                 pet.getLatitude() == 0) {
                                             item02.setStatusText("状态: 失败");
                                             item02.setStatusTextColor(Color.RED);
@@ -402,6 +433,8 @@ public class MainActivity extends AppCompatActivity {
                                         item02.setWeiduText("" + pet.getLatitude());
                                         item02.setSwText("" + pet.getSVersion());
                                         item02.setHwText("" + pet.getHVersion());
+                                        item02.setCnText(""+pet.getGpsCn1()+"、"+pet.getGpsCn2()+"、"+pet.getGpsCn3());
+                                        item02.setModelText(Const.DEFAULT_MODEL);
                                     }
                                     break;
                                 case REQUEST_SCAN_CODE_03:
@@ -416,6 +449,7 @@ public class MainActivity extends AppCompatActivity {
                                                 pet.getBattery() == 0 ||
                                                 pet.getLongitude() == 0 ||
                                                 !(sw.equals(pet.getSVersion())) ||
+                                                !judgeCn(pet, minCn)||
                                                 pet.getLatitude() == 0) {
                                             item03.setStatusText("状态: 失败");
                                             item03.setStatusTextColor(Color.RED);
@@ -430,6 +464,8 @@ public class MainActivity extends AppCompatActivity {
                                         item03.setWeiduText("" + pet.getLatitude());
                                         item03.setSwText("" + pet.getSVersion());
                                         item03.setHwText("" + pet.getHVersion());
+                                        item03.setCnText(""+pet.getGpsCn1()+"、"+pet.getGpsCn2()+"、"+pet.getGpsCn3());
+                                        item03.setModelText(Const.DEFAULT_MODEL);
                                     }
                                     break;
                                 case REQUEST_SCAN_CODE_04:
@@ -444,6 +480,7 @@ public class MainActivity extends AppCompatActivity {
                                                 pet.getBattery() == 0 ||
                                                 pet.getLongitude() == 0 ||
                                                 !(sw.equals(pet.getSVersion())) ||
+                                                !judgeCn(pet, minCn)||
                                                 pet.getLatitude() == 0) {
                                             item04.setStatusText("状态: 失败");
                                             item04.setStatusTextColor(Color.RED);
@@ -458,6 +495,8 @@ public class MainActivity extends AppCompatActivity {
                                         item04.setWeiduText("" + pet.getLatitude());
                                         item04.setSwText("" + pet.getSVersion());
                                         item04.setHwText("" + pet.getHVersion());
+                                        item04.setCnText(""+pet.getGpsCn1()+"、"+pet.getGpsCn2()+"、"+pet.getGpsCn3());
+                                        item04.setModelText(Const.DEFAULT_MODEL);
                                     }
                                     break;
                                 case REQUEST_SCAN_CODE_05:
@@ -472,6 +511,7 @@ public class MainActivity extends AppCompatActivity {
                                                 pet.getBattery() == 0 ||
                                                 pet.getLongitude() == 0 ||
                                                 !(sw.equals(pet.getSVersion())) ||
+                                                !judgeCn(pet, minCn)||
                                                 pet.getLatitude() == 0) {
                                             item05.setStatusText("状态: 失败");
                                             item05.setStatusTextColor(Color.RED);
@@ -486,6 +526,8 @@ public class MainActivity extends AppCompatActivity {
                                         item05.setWeiduText("" + pet.getLatitude());
                                         item05.setSwText("" + pet.getSVersion());
                                         item05.setHwText("" + pet.getHVersion());
+                                        item05.setCnText(""+pet.getGpsCn1()+"、"+pet.getGpsCn2()+"、"+pet.getGpsCn3());
+                                        item05.setModelText(Const.DEFAULT_MODEL);
                                     }
                                     break;
                                 default:

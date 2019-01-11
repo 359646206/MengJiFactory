@@ -27,6 +27,8 @@ public class ItemView extends FrameLayout{
     private TextView weidu;
     private TextView sw;
     private TextView hw;
+    private TextView cn;
+    private TextView model;
 
     public ItemView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -47,6 +49,8 @@ public class ItemView extends FrameLayout{
         weidu = findViewById(R.id.weidu);
         sw = findViewById(R.id.sw);
         hw = findViewById(R.id.hw);
+        cn = findViewById(R.id.cn);
+        model = findViewById(R.id.model);
     }
     public void setIndexText(String text) {
         index.setText(text);
@@ -91,6 +95,14 @@ public class ItemView extends FrameLayout{
         hw.setText(text);
     }
 
+    public void setCnText(String text) {
+        cn.setText(text);
+    }
+
+    public void setModelText(String text) {
+        model.setText(text);
+    }
+
     public String getImeiText() {
         return imei.getText().toString();
     }
@@ -126,6 +138,8 @@ public class ItemView extends FrameLayout{
         weidu.setText(null);
         sw.setText(null);
         hw.setText(null);
+        cn.setText(null);
+        model.setText(null);
     }
 
 }

@@ -6,19 +6,23 @@ package com.pet.test.javabean;
 
 public class Pet {
 
+
     /**
-     * Id : d701f538-c12f-11e8-9780-faae74949400
-     * IMEI : 861766031830973
+     * Id : 84b6a1ee-e64a-11e8-acb0-faae74949400
+     * IMEI : 867726030324174
      * Longitude : 113.98801
-     * Latitude : 22.591902
-     * Battery : 64
+     * Latitude : 22.591837
+     * Battery : 24
      * States : normal
-     * Direct : 278.39
+     * Direct : 0
      * Coodi : 0
-     * Nbcsq : 10
-     * HVersion : HW_V02
-     * SVersion : SW_20180827
-     * ts : 1538125636
+     * Nbcsq : 16
+     * HVersion :
+     * SVersion :
+     * gpsCn1 : 45
+     * gpsCn2 : 44
+     * gpsCn3 : 42
+     * ts : 1545298073
      */
 
     private String Id;
@@ -27,11 +31,14 @@ public class Pet {
     private double Latitude;
     private int Battery;
     private String States;
-    private double Direct;
+    private int Direct;
     private int Coodi;
     private int Nbcsq;
     private String HVersion;
     private String SVersion;
+    private String gpsCn1;
+    private String gpsCn2;
+    private String gpsCn3;
     private int ts;
 
     public String getId() {
@@ -82,11 +89,11 @@ public class Pet {
         this.States = States;
     }
 
-    public double getDirect() {
+    public int getDirect() {
         return Direct;
     }
 
-    public void setDirect(double Direct) {
+    public void setDirect(int Direct) {
         this.Direct = Direct;
     }
 
@@ -122,6 +129,30 @@ public class Pet {
         this.SVersion = SVersion;
     }
 
+    public String getGpsCn1() {
+        return gpsCn1;
+    }
+
+    public void setGpsCn1(String gpsCn1) {
+        this.gpsCn1 = gpsCn1;
+    }
+
+    public String getGpsCn2() {
+        return gpsCn2;
+    }
+
+    public void setGpsCn2(String gpsCn2) {
+        this.gpsCn2 = gpsCn2;
+    }
+
+    public String getGpsCn3() {
+        return gpsCn3;
+    }
+
+    public void setGpsCn3(String gpsCn3) {
+        this.gpsCn3 = gpsCn3;
+    }
+
     public int getTs() {
         return ts;
     }
@@ -144,6 +175,9 @@ public class Pet {
                 ", Nbcsq=" + Nbcsq +
                 ", HVersion='" + HVersion + '\'' +
                 ", SVersion='" + SVersion + '\'' +
+                ", gpsCn1='" + gpsCn1 + '\'' +
+                ", gpsCn2='" + gpsCn2 + '\'' +
+                ", gpsCn3='" + gpsCn3 + '\'' +
                 ", ts=" + ts +
                 '}';
     }

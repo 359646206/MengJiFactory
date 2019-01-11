@@ -6,6 +6,10 @@
             android:numeric="integer"
             android:title="CSQ最低值" />
         <EditTextPreference
+            android:key="KEY_CN"
+            android:title="星值最低值(输入范围0-50)"
+            android:numeric="integer" />
+        <EditTextPreference
             android:key="KEY_SW_VERSION"
             android:title="软件版本测试值" />
 
