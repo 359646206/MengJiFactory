@@ -68,16 +68,18 @@ public class MainActivity extends AppCompatActivity {
     private ItemView item03;
     private ItemView item04;
     private ItemView item05;
-    private TextView settingsText;
+    private TextView settingsText, refreshText;
 
     private SharedPreferences mSharedPreferences;
+
+    private boolean refreshAll = false;
 
     private Handler mHandler = new Handler();
     private Runnable mRunnable01 = new Runnable() {
         @Override
         public void run() {
             infoPet(REQUEST_SCAN_CODE_01, imei01Str);
-            Log.i(TAG, "mRunnable--> isOngoing01=" + isOngoing01);
+            Log.i(TAG, "mRunnable----------------------------> isOngoing01=" + isOngoing01);
             if (isOngoing01) {
                 mHandler.postDelayed(mRunnable01, LOOP_PERIOD);
             }
@@ -87,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void run() {
             infoPet(REQUEST_SCAN_CODE_02, imei02Str);
-            Log.i(TAG, "mRunnable--> isOngoing02=" + isOngoing02);
+            Log.i(TAG, "mRunnable----------------------------> isOngoing02=" + isOngoing02);
             if (isOngoing02) {
                 mHandler.postDelayed(mRunnable02, LOOP_PERIOD);
             }
@@ -97,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void run() {
             infoPet(REQUEST_SCAN_CODE_03, imei03Str);
-            Log.i(TAG, "mRunnable--> isOngoing03=" + isOngoing03);
+            Log.i(TAG, "mRunnable--------------------------------> isOngoing03=" + isOngoing03);
             if (isOngoing03) {
                 mHandler.postDelayed(mRunnable03, LOOP_PERIOD);
             }
@@ -107,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void run() {
             infoPet(REQUEST_SCAN_CODE_04, imei04Str);
-            Log.i(TAG, "mRunnable--> isOngoing04=" + isOngoing04);
+            Log.i(TAG, "mRunnable----------------------------------> isOngoing04=" + isOngoing04);
             if (isOngoing04) {
                 mHandler.postDelayed(mRunnable04, LOOP_PERIOD);
             }
@@ -117,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void run() {
             infoPet(REQUEST_SCAN_CODE_05, imei05Str);
-            Log.i(TAG, "mRunnable--> isOngoing05=" + isOngoing05);
+            Log.i(TAG, "mRunnable-------------------------------------> isOngoing05=" + isOngoing05);
             if (isOngoing05) {
                 mHandler.postDelayed(mRunnable05, LOOP_PERIOD);
             }
@@ -314,6 +316,55 @@ public class MainActivity extends AppCompatActivity {
                 item05.setScanButtonEnable(true);
             }
         });
+
+        refreshText = findViewById(R.id.refresh);
+        refreshText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i(TAG, "******************* refreshAll status**************");
+                refreshAll = true;
+                if (!TextUtils.isEmpty(imei01Str)) {
+                    mHandler.removeCallbacks(mRunnable01);
+                    isOngoing01 = true;
+                    item01.setStopButtonEnable(true);
+                    item01.setScanButtonEnable(false);
+                    mHandler.post(mRunnable01);
+                }
+
+                if (!TextUtils.isEmpty(imei02Str)) {
+                    mHandler.removeCallbacks(mRunnable02);
+                    isOngoing02 = true;
+                    item02.setStopButtonEnable(true);
+                    item02.setScanButtonEnable(false);
+                    mHandler.post(mRunnable02);
+                }
+
+                if (!TextUtils.isEmpty(imei03Str)) {
+                    mHandler.removeCallbacks(mRunnable03);
+                    isOngoing03 = true;
+                    item03.setStopButtonEnable(true);
+                    item03.setScanButtonEnable(false);
+                    mHandler.post(mRunnable03);
+                }
+
+                if (!TextUtils.isEmpty(imei04Str)) {
+                    mHandler.removeCallbacks(mRunnable04);
+                    isOngoing04 = true;
+                    item04.setStopButtonEnable(true);
+                    item04.setScanButtonEnable(false);
+                    mHandler.post(mRunnable04);
+                }
+
+                if (!TextUtils.isEmpty(imei05Str)) {
+                    mHandler.removeCallbacks(mRunnable05);
+                    isOngoing05 = true;
+                    item05.setStopButtonEnable(true);
+                    item05.setScanButtonEnable(false);
+                    mHandler.post(mRunnable05);
+                }
+
+            }
+        });
     }
 
     private void startQrCode(int requestCode) {
@@ -364,7 +415,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onNext(BaseEntity<Pet> baseEntity) {
                         int status = baseEntity.getStatus();
-                        Log.i(TAG, " info onNext() status=" + status);
+                        Log.i(TAG, " info111111 onNext() status=" + baseEntity.toString());
                         if (status == 200) {
                             Pet pet = baseEntity.getData();
                             String csqStr = mSharedPreferences.getString(Const.KEY_CSQ, Const.DEFAULT_CSQ);
@@ -519,7 +570,7 @@ public class MainActivity extends AppCompatActivity {
                                             item05.setStatusText("状态: 成功");
                                             item05.setStatusTextColor(Color.GREEN);
                                         }
-                                        item05.setTimeText(TimeUtil.formatData("HH:mm:ss", pet.getTs()));
+                                        item05.setTimeText(TimeUtil.formatData("yyyy-MM-dd HH:mm:ss", pet.getTs()));
                                         item05.setCsqText("" + pet.getNbcsq());
                                         item05.setBatteryText("" + pet.getBattery());
                                         item05.setJingduText("" + pet.getLongitude());

@@ -18,6 +18,7 @@
     <string name="state_wait">状态:等待数据...</string>
     <string name="state_shutdown">状态:关机</string>
     <string name="state_null">状态:</string>
+    <string name="refresh">刷新</string>
     <string name="settings">设置</string>
     <string name="csq_min">CSQ最低值</string>
 
